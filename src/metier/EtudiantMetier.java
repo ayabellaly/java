@@ -1,16 +1,23 @@
 package metier;
-import dao.EtudiantDao;
+import dao.daoMysql.EtudiantDao;
 import lombok.*;
 import modele.Etudiant;
+
+import java.sql.Connection;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
 
 public class EtudiantMetier implements Imetier{
+
+    private Connection connection;
+
+
+
     EtudiantDao etudiantDao;
 
     public Etudiant Calculer_moyenne(Integer idEtudiant) throws Exception {
-        var etudiant = etudiantDao.trouverParId(idEtudiant);
+        var etudiant = etudiantDao.findbyid(idEtudiant);
 
         if (etudiant == null)
             throw new Exception("l id du note n'est pas disponible");
